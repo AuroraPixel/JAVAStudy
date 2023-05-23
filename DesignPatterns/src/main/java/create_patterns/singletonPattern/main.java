@@ -1,5 +1,6 @@
 package create_patterns.singletonPattern;
 
+import create_patterns.singletonPattern.EagerInitalization.InnerClassSinglePattern;
 import create_patterns.singletonPattern.EagerInitalization.LazySinglePattern;
 import create_patterns.singletonPattern.EagerInitalization.SinglePattern;
 import create_patterns.singletonPattern.EagerInitalization.normalInstance;
@@ -14,8 +15,18 @@ public class main {
 //        createLazySinglePattern();
 //        //多线程下的懒汉式
 //        manyThreadCreateLazySinglePattern();
-        //线程安全的懒汉式
-        createSynchronizeLazySinglePattern();
+//        //线程安全的懒汉式(volatile+synchronize)
+//        createSynchronizeLazySinglePattern();
+        //匿名内部类
+        createInnerClassSinglePattern();
+    }
+
+    //匿名内部类
+    private static void createInnerClassSinglePattern(){
+        for (int i = 0; i < 20; i++) {
+            InnerClassSinglePattern instance = InnerClassSinglePattern.getInstance();
+            System.out.println(instance);
+        }
     }
 
     //懒汉式(线程不安全的)
