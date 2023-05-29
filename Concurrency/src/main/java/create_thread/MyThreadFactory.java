@@ -1,6 +1,7 @@
 package create_thread;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -21,6 +22,7 @@ public class MyThreadFactory {
             }).start();
         }
         countDownLatch.await();
+        ThreadFactory threadFactory = Executors.defaultThreadFactory();
     }
 
     public static class TestThreadFactory implements ThreadFactory{
@@ -71,6 +73,36 @@ public class MyThreadFactory {
             thread.setDaemon(false);
             thread.setPriority(Thread.NORM_PRIORITY);
             return thread;
+        }
+    }
+
+
+    public static class TestThreadFactory1 implements ThreadFactory{
+        private final AtomicInteger count =  new AtomicInteger(0);
+        private final AtomicInteger threadSeq = new AtomicInteger(0);
+
+        private  Integer maxThreadSize;
+
+        private  String threadGroupName;
+
+        private  String threadName;
+
+        private  ThreadGroup threadGroup;
+
+        TestThreadFactory1(Integer maxThreadSize,String threadGroupName,String threadName){
+            this.maxThreadSize = maxThreadSize;
+            this.threadGroupName = threadGroupName;
+            this.threadName = threadName;
+            this.threadGroup = new ThreadGroup(this.threadGroupName);
+        }
+
+        @Override
+        public Thread newThread(Runnable r) {
+            int i = count.incrementAndGet();
+            if(i>maxThreadSize){
+                return null;
+            }
+            return new Thread(threadGroup,r,threadName+"-"+threadSeq.incrementAndGet());
         }
     }
 }
