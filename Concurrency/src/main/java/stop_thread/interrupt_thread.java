@@ -1,24 +1,27 @@
 package stop_thread;
 
+import java.sql.SQLOutput;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class interrupt_thread {
 
     public static void main(String[] args) {
-        Thread normal = new Thread(new NormalThread(),"normal");
-        Thread lock = new Thread(new ThreadWithLock(),"lock");
-        Thread whileThread = new Thread(new WhileThread(),"while");
-        normal.start();
-        lock.start();
-        whileThread.start();
-        try {
-            Thread.sleep(3000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        normal.interrupt();
-        lock.interrupt();
-        whileThread.interrupt();
+//        Thread normal = new Thread(new NormalThread(),"normal");
+//        Thread lock = new Thread(new ThreadWithLock(),"lock");
+//        Thread whileThread = new Thread(new WhileThread(),"while");
+//        normal.start();
+//        lock.start();
+//        whileThread.start();
+//        try {
+//            Thread.sleep(3000L);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        normal.interrupt();
+//        lock.interrupt();
+//        whileThread.interrupt();
 
     }
 
@@ -71,6 +74,14 @@ public class interrupt_thread {
                 }
                 System.out.println("while执行:"+i);
             }
+        }
+    }
+
+    static class MyThreadPool{
+        public void createThreadPool(){
+            ExecutorService executorService = Executors.newFixedThreadPool(1);
+            executorService.execute(new NormalThread());
+            executorService.shutdown();
         }
     }
 }

@@ -1,5 +1,6 @@
 package create_thread;
 
+
 public class createThread {
     public static void main(String[] args) {
 //        MyThread a = new MyThread("a");
@@ -7,8 +8,10 @@ public class createThread {
 //        a.start();
 //        b.start();
         MyThread1 c = new MyThread1("c");
-        new Thread(c,"c").start();
+        Thread thread = new Thread(c, "c");
+        Thread.yield();
         new Thread(c,"d").start();
+
 
         new Thread(()->{
             for (int i = 20; i > 0; i--) {
