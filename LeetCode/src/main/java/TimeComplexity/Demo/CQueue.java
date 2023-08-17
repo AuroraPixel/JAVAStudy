@@ -9,8 +9,8 @@ public class CQueue {
     private List<Integer> B;
 
     public CQueue() {
-        A = new ArrayList<>();
-        B = new ArrayList<>();
+        A = new ArrayList<Integer>();
+        B = new ArrayList<Integer>();
     }
 
     public void appendTail(int value) {
