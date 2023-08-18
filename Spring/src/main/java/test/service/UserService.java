@@ -1,13 +1,10 @@
 package test.service;
 
-import core.Autowired;
-import core.BeanNameAware;
-import core.Component;
-import core.Scope;
+import core.*;
 
 @Component("userService")
 @Scope("protoType") // 默认是单例模式
-public class UserService implements BeanNameAware {
+public class UserService implements BeanNameAware , InitializingBean {
 
     @Autowired
     private TestService testService;
@@ -22,5 +19,10 @@ public class UserService implements BeanNameAware {
     @Override
     public void setBeanName(String name) {
         this.beanName = name;
+    }
+
+    @Override
+    public void afterPropertiesSet() {
+        System.out.println("UserService 初始化");
     }
 }

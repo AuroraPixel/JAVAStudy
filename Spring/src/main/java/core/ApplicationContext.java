@@ -55,6 +55,10 @@ public class ApplicationContext {
             if(o instanceof BeanNameAware){
                 ((BeanNameAware) o).setBeanName(beaName);
             }
+            //初始化前回调
+            if(o instanceof InitializingBean){
+                ((InitializingBean) o).afterPropertiesSet();
+            }
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
