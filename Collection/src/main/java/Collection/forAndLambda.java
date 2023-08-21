@@ -2,6 +2,8 @@ package Collection;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.ListIterator;
 
 public class forAndLambda {
     static class User {
@@ -48,5 +50,13 @@ public class forAndLambda {
         }
         System.out.println(users);
 
+    }
+
+    public static void listMethod(){
+        List<String> lists = new ArrayList<>();
+        lists.add("aaa");
+        lists.add("ddd");
+        lists.add("ccc");
+        ListIterator<String> stringListIterator = lists.listIterator();
     }
 }
