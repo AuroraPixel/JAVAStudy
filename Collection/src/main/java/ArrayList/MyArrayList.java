@@ -1,7 +1,6 @@
 package ArrayList;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 
 public class MyArrayList<E> {
     /**
@@ -30,6 +29,11 @@ public class MyArrayList<E> {
      * 集合长度/下一个元素的指针
      */
     private int size;
+
+    /**
+     * 集合修改次数
+     */
+    private int modCount;
 
     /**
      * 初始化
@@ -64,6 +68,7 @@ public class MyArrayList<E> {
      * @return
      */
     public boolean add(E e) {
+        modCount++;
         //集合容量扩容
         ensureCapacityInternal(size + 1);
         elementData[size++] = e;
@@ -157,5 +162,45 @@ public class MyArrayList<E> {
         return (minCapacity > MAX_ARRAY_SIZE) ?
                 Integer.MAX_VALUE :
                 MAX_ARRAY_SIZE;
+    }
+
+    public Iterator<E> getIterator(){
+        return new Itr();
+    }
+
+
+    private class Itr implements Iterator<E> {
+        //当前指针默认为0
+        int cursor;
+        int lastRet = -1;
+
+        int expectedModCount = modCount;
+
+        @Override
+        public boolean hasNext() {
+            return cursor!=size;
+        }
+
+        @Override
+        public E next() {
+            //并发修改异常检测
+            checkForComodification();
+            int i = cursor;
+            if(i>=size){
+                throw new NoSuchElementException();
+            }
+            Object[] objects = MyArrayList.this.elementData;
+            if(i>=objects.length){
+                throw new ConcurrentModificationException();
+            }
+            //指针后移
+            cursor=i+1;
+            return (E) objects[lastRet=i];
+        }
+
+        final void checkForComodification() {
+            if (modCount != expectedModCount)
+                throw new ConcurrentModificationException();
+        }
     }
 }
