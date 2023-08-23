@@ -1,31 +1,22 @@
 package Link;
 
+import java.sql.SQLOutput;
+import java.util.Stack;
+
 public class index {
     public static void main(String[] args) {
-        NodeList nodeList = new NodeList();
-        Node<String> node = new Node<>(1 + "", 1);
-        nodeList.add(node);
-        Node<String> node1 = new Node<>(2 + "", 2);
-        nodeList.add(node1);
-        Node<String> node2 = new Node<>(5 + "", 5);
-        nodeList.add(node2);
-        Node<String> node3 = new Node<>(4 + "", 4);
-        nodeList.add(node3);
-        Node<String> node4 = new Node<>(7 + "", 7);
-        nodeList.add(node4);
-        Node<String> node5 = new Node<>(110 + "", 2);
-        nodeList.update(node5);
-        nodeList.remove(7);
-        System.out.println("-------------------");
-        countNodeLength(nodeList);
-        System.out.println("-------------------");
-        nodeList.showList();
-        System.out.println("-------------------");
-        System.out.println(getEndIndex(nodeList, 2).getItem());
-        System.out.println("-------------------");
-        reverseNode(nodeList);
-        nodeList.showList();
+        long a = 10000;
+        a=a*100000000000L;
+        while(true){
+            //取余数
+            int yu=(int)(a%10);
+            System.out.println(yu);
+            a = a/10;
+            if(a==0){
+                break;
+            }
 
+        }
     }
 
     public static void countNodeLength(NodeList nodeList) {
