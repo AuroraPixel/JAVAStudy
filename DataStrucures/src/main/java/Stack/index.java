@@ -1,6 +1,6 @@
 package Stack;
 
-import com.sun.xml.internal.ws.encoding.MtomCodec;
+
 
 public class index {
     public static void main(String[] args) {
