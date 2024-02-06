@@ -2,7 +2,7 @@ package TimeComplexity;
 
 public class O_N {
     public static void main(String[] args) {
-        System.out.println(algorithm(1000));
+        System.out.println(algorithm(10));
     }
 
     static int algorithm(int N) {
